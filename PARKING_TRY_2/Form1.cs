@@ -18,6 +18,7 @@ namespace PARKING_TRY_2
         List<Passage> passagesList;
         List<Employer> employersList;
         SqlOrmProvider sqlProvider;
+
         public Form1()
         {
             InitializeComponent();
@@ -26,7 +27,7 @@ namespace PARKING_TRY_2
         private void Form1_Load(object sender, EventArgs e)
         {
             sqlProvider = new SqlOrmProvider();
-            
+
             this.updatePassages();
 
             passagesDataGridView.Columns[0].HeaderText = "Дата и время";
@@ -34,7 +35,7 @@ namespace PARKING_TRY_2
             passagesDataGridView.Columns[2].HeaderText = "Вход/Выход";
 
             this.employersList = sqlProvider.GetEmployers();
-            this.employeesComboBox.DataSource = this.employersList.Select(c=>c.FullName).ToList();
+            this.employeesComboBox.DataSource = this.employersList.Select(c => c.FullName).ToList();
 
             this.employeesComboBox.Update();
             this.employeesComboBox.Refresh();
@@ -42,7 +43,19 @@ namespace PARKING_TRY_2
 
         }
 
-        private void updatePassages() 
+        public void AcceptFilter(Filter filter)
+        {
+            this.passagesList = sqlProvider.GetPassages();
+
+            this.passagesList = filter.Accept(this.passagesList);
+
+            this.passagesDataGridView.DataSource = passagesList.Select(
+                c => new { c.DateTime, c.FullName, V = InputStatusConverter.StatusToString(c.InputStatus) }).ToList();
+            this.passagesDataGridView.Update();
+            this.passagesDataGridView.Refresh();
+        }
+
+        private void updatePassages()
         {
             this.passagesList = sqlProvider.GetPassages();
 
@@ -62,7 +75,14 @@ namespace PARKING_TRY_2
                 FullName = employeesComboBox.Text,
             };
 
-            sqlProvider.InsertPassage(passage);
+            try
+            {
+                sqlProvider.InsertPassage(passage);
+            }
+            catch
+            {
+                MessageBox.Show($"Имя {passage.FullName} не найдено в базе данных.\nПроверьте корректность введенных данных.");
+            }
 
             this.updatePassages();
 
@@ -90,7 +110,11 @@ namespace PARKING_TRY_2
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            Form2 form2 = new Form2();
+            form2.EmployersList = this.employersList;
+            form2.SqlProvider = this.sqlProvider;
+            form2.Form1 = this;
+            form2.Show();
         }
     }
 }

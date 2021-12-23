@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PARKING_TRY_2
 {
-    class SqlOrmProvider
+    public class SqlOrmProvider
     {
         string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\1\source\repos\PARKING_TRY_2\PARKING_TRY_2\Database.accdb";
         public void InsertPassage(Passage passage)

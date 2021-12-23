@@ -58,7 +58,7 @@ namespace PARKING_TRY_2
             this.passagesDataGridView.Location = new System.Drawing.Point(12, 72);
             this.passagesDataGridView.Name = "passagesDataGridView";
             this.passagesDataGridView.ReadOnly = true;
-            this.passagesDataGridView.Size = new System.Drawing.Size(776, 366);
+            this.passagesDataGridView.Size = new System.Drawing.Size(598, 295);
             this.passagesDataGridView.TabIndex = 0;
             // 
             // запросПроходыЧерезКППBindingSource
@@ -127,7 +127,7 @@ namespace PARKING_TRY_2
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(713, 12);
+            this.button3.Location = new System.Drawing.Point(535, 12);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 5;
@@ -147,13 +147,14 @@ namespace PARKING_TRY_2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(620, 381);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.employeesComboBox);
             this.Controls.Add(this.OutputButton);
             this.Controls.Add(this.InputButton);
             this.Controls.Add(this.passagesDataGridView);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PARKING_TRY_2
 {
-    class Employer
+    public class Employer
     {
         public int id;
         public string FullName;
